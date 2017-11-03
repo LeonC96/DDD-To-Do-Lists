@@ -21,6 +21,13 @@ class NewTaskViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
 		taskNameTxtField.delegate = self
+		
+		if let task = task {
+			navigationItem.title = task.name
+			taskNameTxtField.text = task.name
+			dueDateField.date = task.dueDate
+			descriptionField.text = task.description
+		}
 		updateSaveButtonState()
     }
 
@@ -47,7 +54,15 @@ class NewTaskViewController: UIViewController, UITextFieldDelegate {
 	}
 
 	@IBAction func cancel(_ sender: UIBarButtonItem) {
-		dismiss(animated: true, completion: nil)
+		let isPresentingInAddTaskMode = presentingViewController is UINavigationController
+		
+		if (isPresentingInAddTaskMode){
+			dismiss(animated: true, completion: nil)
+		} else if let owningNaviController = navigationController{
+			owningNaviController.popViewController(animated: true)
+		} else {
+			fatalError("The NewTaskViewController is not inside a navigation controller.")
+		}
 	}
 	
     // MARK: - Navigation

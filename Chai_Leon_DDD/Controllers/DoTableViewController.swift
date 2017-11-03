@@ -32,10 +32,18 @@ class DoTableViewController: UITableViewController {
 	
 	@IBAction func unwindToDoTaskList(sender: UIStoryboardSegue){
 		if let sourceViewController = sender.source as? NewTaskViewController, let task = sourceViewController.task {
-			let newIndexPath = IndexPath(row: doTasks.count, section: 0)
 			
-			doTasks.append(task)
-			tableView.insertRows(at: [newIndexPath], with: .automatic)
+			if let selectedIndexPath = tableView.indexPathForSelectedRow {
+				// Update an existing meal.
+				doTasks[selectedIndexPath.row] = task
+				tableView.reloadRows(at: [selectedIndexPath], with: .none)
+			} else {
+			
+				let newIndexPath = IndexPath(row: doTasks.count, section: 0)
+			
+				doTasks.append(task)
+				tableView.insertRows(at: [newIndexPath], with: .automatic)
+			}
 		}
 	}
 
@@ -119,14 +127,37 @@ class DoTableViewController: UITableViewController {
     }
     */
 
-    /*
+	
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+		
+		switch(segue.identifier ?? ""){
+			case "AddTask":
+				print("Adding new task")
+			
+			case "ShowDetail":
+				guard let taskDetailViewController = segue.destination as? NewTaskViewController else {
+					fatalError("Unexpected destination: \(segue.destination)")
+				}
+				
+				guard let selectedTaskCell = sender as? TaskTableViewCell else {
+					fatalError("Unexpected sender: \(sender)")
+				}
+				
+				guard let indexPath = tableView.indexPath(for: selectedTaskCell) else {
+					fatalError("The selected cell is not being displayed by the table")
+				}
+				
+				let selectedTask = doTasks[indexPath.row]
+				taskDetailViewController.task = selectedTask
+			
+			default:
+			fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+		}
     }
-    */
+	
 
 }

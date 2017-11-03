@@ -12,6 +12,7 @@ class TaskTableViewCell: UITableViewCell {
 
 	@IBOutlet weak var taskLbl: UILabel!
 	@IBOutlet weak var descriptionLbl: UILabel!
+	@IBOutlet weak var dueDateLbl: UILabel!
 	
     var task: Task? {
         didSet{
@@ -23,6 +24,11 @@ class TaskTableViewCell: UITableViewCell {
             descriptionLbl.text = task.description
             taskLbl.sizeToFit()
             descriptionLbl.sizeToFit()
+			
+			let dateFormatter = DateFormatter()
+			dateFormatter.dateStyle = .short
+			dueDateLbl.text = dateFormatter.string(from: task.dueDate)
+			dueDateLbl.sizeToFit()
         }
     }
     

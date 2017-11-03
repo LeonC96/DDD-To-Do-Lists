@@ -63,10 +63,18 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Due Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1J-EW-nbP">
+                                            <rect key="frame" x="295" y="19" width="72" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="descriptionLabel" destination="7rl-Pc-o9F" id="APB-rJ-ky7"/>
+                                    <outlet property="dueDateLbl" destination="X1J-EW-nbP" id="XM7-F3-Viz"/>
                                     <outlet property="nameLabel" destination="cRY-lp-po8" id="09s-Q8-E9O"/>
                                 </connections>
                             </tableViewCell>
@@ -80,7 +88,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="acx-IC-blT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="366" y="275"/>
+            <point key="canvasLocation" x="365.60000000000002" y="274.8768472906404"/>
         </scene>
         <!--Done-->
         <scene sceneID="GPY-QS-Svo">
@@ -141,10 +149,18 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Due Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lef-EG-nMq">
+                                            <rect key="frame" x="295" y="19" width="72" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="descriptionLbl" destination="VDf-76-frD" id="8rg-ge-a3a"/>
+                                    <outlet property="dueDateLbl" destination="Lef-EG-nMq" id="ziA-as-f0v"/>
                                     <outlet property="taskLbl" destination="888-fF-EGa" id="AOw-Nn-uZp"/>
                                 </connections>
                             </tableViewCell>
@@ -164,7 +180,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3cG-XE-hhb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1316" y="-463"/>
+            <point key="canvasLocation" x="1316" y="-463.30049261083747"/>
         </scene>
         <!--New Task-->
         <scene sceneID="w0T-16-nPr">
@@ -181,13 +197,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kn5-bX-7gi">
-                                <rect key="frame" x="16" y="169" width="197" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zjI-m1-p1K">
                                 <rect key="frame" x="0.0" y="258" width="375" height="162"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
@@ -216,12 +225,23 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kn5-bX-7gi">
+                                <rect key="frame" x="16" y="169" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="Rdl-DC-add"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Task" id="loC-tp-ZoS">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="I6d-aY-SQZ"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="I6d-aY-SQZ">
+                            <connections>
+                                <action selector="cancel:" destination="4MY-Jm-kU0" id="eTQ-uN-Wde"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="TAs-LE-3nb">
                             <connections>
                                 <segue destination="u0K-u0-bev" kind="unwind" unwindAction="unwindToDoTaskListWithSender:" id="FxN-7b-Nmq"/>
@@ -238,7 +258,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFe-BD-418" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="u0K-u0-bev" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3020" y="-463"/>
+            <point key="canvasLocation" x="3020" y="-463.30049261083747"/>
         </scene>
         <!--Do-->
         <scene sceneID="t94-Ge-tfa">

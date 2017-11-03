@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewTaskViewController: UIViewController {
+class NewTaskViewController: UIViewController, UITextFieldDelegate {
 
 	@IBOutlet weak var taskNameTxtField: UITextField!
 	@IBOutlet weak var dueDateField: UIDatePicker!
@@ -20,16 +20,35 @@ class NewTaskViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        // Do any additional setup after loading the view.
+		taskNameTxtField.delegate = self
+		updateSaveButtonState()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+	
+	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		// Disable the Save button while editing.
+		saveButton.isEnabled = false
+	}
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		updateSaveButtonState()
+		navigationItem.title = textField.text
+	}
+	
+	private func updateSaveButtonState() {
+		// Disable the Save button if the text field is empty.
+		let text = taskNameTxtField.text ?? ""
+		saveButton.isEnabled = !text.isEmpty
+	}
 
+	@IBAction func cancel(_ sender: UIBarButtonItem) {
+		dismiss(animated: true, completion: nil)
+	}
 	
     // MARK: - Navigation
 

@@ -10,11 +10,6 @@ import UIKit
 
 class NewTaskViewController: UIViewController {
 
-	//@IBOutlet weak var descriptionField: UITextView!
-	//@IBOutlet weak var taskNameTxtField: UITextField!
-	//@IBOutlet weak var dueDateField: UIDatePicker!
-	
-	//@IBOutlet weak var saveButton: UIBarButtonItem!
 	@IBOutlet weak var taskNameTxtField: UITextField!
 	@IBOutlet weak var dueDateField: UIDatePicker!
 	@IBOutlet weak var descriptionField: UITextView!

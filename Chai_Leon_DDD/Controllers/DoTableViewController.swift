@@ -24,13 +24,6 @@ class DoTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		//var handle
-		//handle = []
-		
-	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -103,6 +103,10 @@ class DoTableViewController: UITableViewController {
 		let closeAction = UIContextualAction(style: .normal, title:  "Doing",
 		                                     handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 			print("OK, marked as Doing")
+			self.doTasks.remove(at: indexPath.row)
+			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+			//DoingTableViewController.doingTask
+												
 			success(true)
 		})
 		//closeAction.image = UIImage(named: "tick")

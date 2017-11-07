@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class LoginViewController: UIViewController {
 
@@ -54,7 +55,6 @@ class LoginViewController: UIViewController {
 		let password = passwordTxtField.text
 		
 		Auth.auth().createUser(withEmail: email!, password: password!) { (user,error) in
-			
 			if(email! == ""){
 				self.messageLbl.text = "Enter An Email!"
 				self.messageLbl.sizeToFit()
@@ -78,7 +78,13 @@ class LoginViewController: UIViewController {
 			self.messageLbl.sizeToFit()
 			self.messageLbl.center.x = self.view.center.x
 			print(email! + " has been registered")
+			
+			//SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
+			//SVProgressHUD.show()
+			//SVProgressHUD.dismiss()
+			
 			self.performSegue(withIdentifier: "startSegue", sender: self)
+			
 		
 		}
 	}

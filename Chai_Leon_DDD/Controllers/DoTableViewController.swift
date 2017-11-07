@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import Firebase
 
 class DoTableViewController: UITableViewController {
 
 	var doTasks: [Task] = Data.generateTaskData()
+	var handle: AuthStateDidChangeListenerHandle?
+	var rootRef: DatabaseReference = Database.database().reference()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		//loadTasks()
-		self.tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "cell")
+		addTask()
+		getTasks()
 		
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -24,7 +27,20 @@ class DoTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		handle = Auth.auth().addStateDidChangeListener{ (auth, user) in
+			
+		}
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		Auth.auth().removeStateDidChangeListener(handle!)
+	}
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -45,6 +61,38 @@ class DoTableViewController: UITableViewController {
 				tableView.insertRows(at: [newIndexPath], with: .automatic)
 			}
 		}
+	}
+	
+	func addTask(){
+		let tasksRef = rootRef.child("doTasks")
+		
+		tasksRef.childByAutoId().setValue(["name" : "test1", "description" : "TESTING"])
+	}
+	
+	func getTasks(){
+		let tasksRef = rootRef.child("doTasks")
+		//let userId = Auth.auth().currentUser?.uid
+		
+		//tasksRef.childByAutoId().setValue(["name" : "HELLO"])
+		
+		tasksRef.observeSingleEvent(of: .value, with: { (snapshot) in
+			for child in snapshot.children {
+				let snap = child as! DataSnapshot
+				let key = snap.key
+				let value = snap.value
+				
+				for v in snap.children{
+					let test = v as! DataSnapshot
+					
+					print("\(test.key) = \(test.value!) ")
+					
+				}
+				print("nxt child")
+				//print("key = \(key)  value = \(value!)")
+			}
+		})
+		
+	
 	}
 
     // MARK: - Table view data source

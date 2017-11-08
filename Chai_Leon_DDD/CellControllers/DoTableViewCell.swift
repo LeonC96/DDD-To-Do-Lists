@@ -24,9 +24,7 @@ class TaskTableViewCell: UITableViewCell {
             descriptionLbl.text = task.description
             taskLbl.sizeToFit()
 			
-			let dateFormatter = DateFormatter()
-			dateFormatter.dateStyle = .short
-			dueDateLbl.text = dateFormatter.string(from: task.dueDate)
+			dueDateLbl.text = Utils.dateToString(date: task.dueDate)
 			dueDateLbl.sizeToFit()
         }
     }

@@ -84,7 +84,6 @@ class NewTaskViewController: UIViewController, UITextFieldDelegate {
 		
 		task = Task(name: name, description: description, dueDate: dueDate)
 		
-		print("this is " + (task?.dueDate.description)!)
     }
 	
 

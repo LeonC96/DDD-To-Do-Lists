@@ -43,7 +43,7 @@ struct Task {
 		description = snapshotValue["description"] as? String
 		
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "mm/dd/yyyy"
+		dateFormatter.dateFormat = "MM/dd/yyyy"
 		let dateString = snapshotValue["dueDate"] as! String
 		dueDate = dateFormatter.date(from: dateString)!
 		

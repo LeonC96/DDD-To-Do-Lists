@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class DoTableViewController: UITableViewController {
 
@@ -19,10 +20,7 @@ class DoTableViewController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		
-		//FirebaseDB.addTask(name: tableName)
-		FirebaseDB.getTasks(name: tableName)
-		
+		getTasks()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -43,6 +41,24 @@ class DoTableViewController: UITableViewController {
 		Auth.auth().removeStateDidChangeListener(handle!)
 	}
 	
+	func getTasks(){
+		SVProgressHUD.setDefaultMaskType(.black)
+		SVProgressHUD.show(withStatus: "Loading...")
+		rootRef.child("doTasks").observe(.value, with: { (snapshot) in
+				for child in snapshot.children {
+					let snap = child as! DataSnapshot
+				
+					let task = Task(snapshot: snap)
+					self.doTasks.append(task)
+					DispatchQueue.main.async() {
+						self.tableView.reloadData()
+					}
+				}
+
+		})
+		SVProgressHUD.dismiss()
+	}
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -57,10 +73,13 @@ class DoTableViewController: UITableViewController {
 				tableView.reloadRows(at: [selectedIndexPath], with: .none)
 			} else {
 			
-				let newIndexPath = IndexPath(row: doTasks.count, section: 0)
-			
+				//let newIndexPath = IndexPath(row: doTasks.count, section: 0)
+				
+				FirebaseDB.addTask(name: tableName, task: task)
+				
 				doTasks.append(task)
-				tableView.insertRows(at: [newIndexPath], with: .automatic)
+				//tableView.insertRows(at: [newIndexPath], with: .automatic)
+				self.tableView.reloadData()
 			}
 		}
 	}
@@ -82,7 +101,7 @@ class DoTableViewController: UITableViewController {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! TaskTableViewCell
 
-		// Fetches the appropriate meal for the data source layout.
+		// Fetches the appropriate task for the data source layout.
 		let doTask = doTasks[indexPath.row]
 		
 		cell.task = doTask

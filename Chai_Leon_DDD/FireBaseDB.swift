@@ -23,18 +23,9 @@ class FirebaseDB{
 		tasksRef.observe(.value, with: { (snapshot) in
 			for child in snapshot.children {
 				let snap = child as! DataSnapshot
-				//let key = snap.key
-				//let value = snap.value
 				
 				let task = Task(snapshot: snap)
 				tasks.append(task)
-				print(task.name)
-				let datefor = DateFormatter()
-				datefor.dateFormat = "mm/dd/yyyy"
-				print(datefor.string(from: task.dueDate))
-				print(task.dueDate.description)
-				print("next child")
-				//print("key = \(key)  value = \(value!)")
 			}
 		})
 		

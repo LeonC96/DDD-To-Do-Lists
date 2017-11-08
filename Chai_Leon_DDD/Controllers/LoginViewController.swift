@@ -16,8 +16,6 @@ class LoginViewController: UIViewController {
 	@IBOutlet weak var passwordTxtField: UITextField!
 	@IBOutlet weak var messageLbl: UILabel!
 	
-	var handle: AuthStateDidChangeListenerHandle?
-	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		

@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-
+		
         // Do any additional setup after loading the view.
     }
 	
@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
     }
     
 	@IBAction func login(_ sender: UIButton) {
+		
+		SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
+		SVProgressHUD.show()
+		
 		let email = emailTxtField.text
 		let password = passwordTxtField.text
 		
@@ -38,6 +42,8 @@ class LoginViewController: UIViewController {
 				self.messageLbl.text = "Wrong Email or Password. Try Agian."
 				self.messageLbl.sizeToFit()
 				self.messageLbl.center.x = self.view.center.x
+				
+				SVProgressHUD.dismiss()
 				return
 			}
 			
@@ -45,12 +51,17 @@ class LoginViewController: UIViewController {
 			self.messageLbl.sizeToFit()
 			self.messageLbl.center.x = self.view.center.x
 			print("Successfully Login")
+			
+			SVProgressHUD.dismiss()
 			self.performSegue(withIdentifier: "startSegue", sender: self)
 
 		}
 	}
 	
 	@IBAction func signup(_ sender: UIButton) {
+		SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
+		SVProgressHUD.show()
+		
 		let email = emailTxtField.text
 		let password = passwordTxtField.text
 		
@@ -59,6 +70,7 @@ class LoginViewController: UIViewController {
 				self.messageLbl.text = "Enter An Email!"
 				self.messageLbl.sizeToFit()
 				self.messageLbl.center.x = self.view.center.x
+				SVProgressHUD.dismiss()
 				return
 			}
 			
@@ -71,6 +83,7 @@ class LoginViewController: UIViewController {
 				}
 				self.messageLbl.sizeToFit()
 				self.messageLbl.center.x = self.view.center.x
+				SVProgressHUD.dismiss()
 				return
 			}
 			
@@ -79,9 +92,7 @@ class LoginViewController: UIViewController {
 			self.messageLbl.center.x = self.view.center.x
 			print(email! + " has been registered")
 			
-			//SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
-			//SVProgressHUD.show()
-			//SVProgressHUD.dismiss()
+			SVProgressHUD.dismiss()
 			
 			self.performSegue(withIdentifier: "startSegue", sender: self)
 			

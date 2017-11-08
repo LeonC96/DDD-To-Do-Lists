@@ -23,7 +23,6 @@ class TaskTableViewCell: UITableViewCell {
             taskLbl.text = task.name
             descriptionLbl.text = task.description
             taskLbl.sizeToFit()
-            descriptionLbl.sizeToFit()
 			
 			let dateFormatter = DateFormatter()
 			dateFormatter.dateStyle = .short

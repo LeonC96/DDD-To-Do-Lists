@@ -11,15 +11,17 @@ import Firebase
 
 class DoTableViewController: UITableViewController {
 
-	var doTasks: [Task] = Data.generateTaskData()
+	let tableName = "doTasks"
+	
+	var doTasks: [Task] = []
 	var handle: AuthStateDidChangeListenerHandle?
 	var rootRef: DatabaseReference = Database.database().reference()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		addTask()
-		getTasks()
+		//FirebaseDB.addTask(name: tableName)
+		FirebaseDB.getTasks(name: tableName)
 		
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -61,38 +63,6 @@ class DoTableViewController: UITableViewController {
 				tableView.insertRows(at: [newIndexPath], with: .automatic)
 			}
 		}
-	}
-	
-	func addTask(){
-		let tasksRef = rootRef.child("doTasks")
-		
-		tasksRef.childByAutoId().setValue(["name" : "test1", "description" : "TESTING"])
-	}
-	
-	func getTasks(){
-		let tasksRef = rootRef.child("doTasks")
-		//let userId = Auth.auth().currentUser?.uid
-		
-		//tasksRef.childByAutoId().setValue(["name" : "HELLO"])
-		
-		tasksRef.observeSingleEvent(of: .value, with: { (snapshot) in
-			for child in snapshot.children {
-				let snap = child as! DataSnapshot
-				let key = snap.key
-				let value = snap.value
-				
-				for v in snap.children{
-					let test = v as! DataSnapshot
-					
-					print("\(test.key) = \(test.value!) ")
-					
-				}
-				print("nxt child")
-				//print("key = \(key)  value = \(value!)")
-			}
-		})
-		
-	
 	}
 
     // MARK: - Table view data source

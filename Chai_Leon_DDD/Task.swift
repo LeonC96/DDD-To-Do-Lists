@@ -7,35 +7,25 @@
 //
 
 import UIKit
+import Firebase
 
-/*
 struct Task {
-	var name: String
-	var description: String?
-}
-*/
-
-class Task {
 	
+	let key: String
 	var name: String
 	var description: String?
 	var dueDate: Date
+	let ref: DatabaseReference?
 	//var isOverDue: Bool
 	
-	init?(name: String, description: String?, dueDate: Date?) {
+	init(name: String, description: String?, dueDate: Date = Date.init(), key: String = "") {
 		
-		if(name.isEmpty) {
-			self.name = "NONE"
-		}
+		self.key = key
 		self.name = name
 		self.description = description
+		self.dueDate = dueDate
 		
-		if(dueDate != nil){
-			self.dueDate = dueDate!
-		} else {
-			self.dueDate = Date.init()
-		}
-		
+		self.ref = nil
 		/*
 		self.dueDate = dueDate
 		if(dueDate <= Date()){
@@ -44,6 +34,20 @@ class Task {
 			self.isOverDue = false
 		}
 		*/
+	}
+	
+	init(snapshot: DataSnapshot) {
+		key = snapshot.key
+		let snapshotValue = snapshot.value as! [String: AnyObject]
+		name = snapshotValue["name"] as! String
+		description = snapshotValue["description"] as? String
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "mm/dd/yyyy"
+		let dateString = snapshotValue["dueDate"] as! String
+		dueDate = dateFormatter.date(from: dateString)!
+		
+		ref = snapshot.ref
 	}
 	
 }

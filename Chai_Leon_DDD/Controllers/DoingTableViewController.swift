@@ -10,8 +10,8 @@ import UIKit
 
 class DoingTableViewController: UITableViewController {
 
-    var doingTasks = Data.generateTaskData()
-    
+	var doingTasks: [Task] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

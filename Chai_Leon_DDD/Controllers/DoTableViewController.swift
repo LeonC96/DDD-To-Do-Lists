@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
+
 class DoTableViewController: UITableViewController {
 
 	let tableName = "doTasks"
@@ -17,10 +18,12 @@ class DoTableViewController: UITableViewController {
 	var doTasks: [Task] = []
 	var handle: AuthStateDidChangeListenerHandle?
 	var rootRef: DatabaseReference = Database.database().reference()
+	let user: User = Auth.auth().currentUser!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		getTasks()
+		
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,6 +37,8 @@ class DoTableViewController: UITableViewController {
 		handle = Auth.auth().addStateDidChangeListener{ (auth, user) in
 			
 		}
+		
+		//getTasks()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -42,18 +47,28 @@ class DoTableViewController: UITableViewController {
 	}
 	
 	func getTasks(){
+		
 		SVProgressHUD.setDefaultMaskType(.black)
 		SVProgressHUD.show(withStatus: "Loading...")
-		rootRef.child("doTasks").observe(.value, with: { (snapshot) in
-				for child in snapshot.children {
-					let snap = child as! DataSnapshot
+		rootRef.child(user.uid).child(tableName).observe(.value, with: { (snapshot) in
+			if(snapshot.childrenCount == 0 ){
+				print("no childern")
+				return
+			}
+			if self.doTasks.count != 0 {
+				self.doTasks = []
+			}
+			for child in snapshot.children {
+				let snap = child as! DataSnapshot
 				
-					let task = Task(snapshot: snap)
-					self.doTasks.append(task)
-					DispatchQueue.main.async() {
-						self.tableView.reloadData()
-					}
+				let task = Task(snapshot: snap)
+					
+				self.doTasks.append(task)
+					
+				DispatchQueue.main.async() {
+					self.tableView.reloadData()
 				}
+			}
 
 		})
 		SVProgressHUD.dismiss()
@@ -65,21 +80,25 @@ class DoTableViewController: UITableViewController {
     }
 	
 	@IBAction func unwindToDoTaskList(sender: UIStoryboardSegue){
-		if let sourceViewController = sender.source as? NewTaskViewController, let task = sourceViewController.task {
+		if let sourceViewController = sender.source as? NewTaskViewController, let updatedTask = sourceViewController.task {
 			
 			if let selectedIndexPath = tableView.indexPathForSelectedRow {
-				// Update an existing meal.
-				doTasks[selectedIndexPath.row] = task
+				// Update an existing task.
+								
+				let dotaskChild = rootRef.child(user.uid).child(tableName).child(updatedTask.key)
+				
+				dotaskChild.updateChildValues(updatedTask.toAnyObject())
+				
 				tableView.reloadRows(at: [selectedIndexPath], with: .none)
 			} else {
 			
 				//let newIndexPath = IndexPath(row: doTasks.count, section: 0)
 				
-				FirebaseDB.addTask(name: tableName, task: task)
+				FirebaseDB.addTask(name: tableName, task: updatedTask)
 				
-				doTasks.append(task)
+				getTasks()
 				//tableView.insertRows(at: [newIndexPath], with: .automatic)
-				self.tableView.reloadData()
+				
 			}
 		}
 	}
@@ -124,11 +143,11 @@ class DoTableViewController: UITableViewController {
         if editingStyle == .delete {
 			
             // Delete the row from the data source
-			//let task = doTasks[indexPath.row]
+			let task = doTasks[indexPath.row]
 			doTasks.remove(at: indexPath.row)
 			
-			
             tableView.deleteRows(at: [indexPath], with: .fade)
+			task.ref?.removeValue()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    

@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import SVProgressHUD
+import Firebase
 
 class DoingTableViewController: UITableViewController {
 
+	let tableName = "doingTasks"
 	var doingTasks: [Task] = []
+	
+	var rootRef: DatabaseReference = Database.database().reference()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +27,34 @@ class DoingTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		getTasks()
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+	func getTasks(){
+		SVProgressHUD.setDefaultMaskType(.black)
+		SVProgressHUD.show(withStatus: "Loading...")
+		rootRef.child(tableName).observe(.value, with: { (snapshot) in
+			for child in snapshot.children {
+				let snap = child as! DataSnapshot
+				
+				let task = Task(snapshot: snap)
+				self.doingTasks.append(task)
+				DispatchQueue.main.async() {
+					self.tableView.reloadData()
+				}
+			}
+			
+		})
+		SVProgressHUD.dismiss()
+	}
+	
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

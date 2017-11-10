@@ -49,7 +49,6 @@ class LoginViewController: UIViewController {
 			self.messageLbl.sizeToFit()
 			self.messageLbl.center.x = self.view.center.x
 			print("Successfully Login")
-			
 			SVProgressHUD.dismiss()
 			self.performSegue(withIdentifier: "startSegue", sender: self)
 
@@ -89,9 +88,9 @@ class LoginViewController: UIViewController {
 			self.messageLbl.sizeToFit()
 			self.messageLbl.center.x = self.view.center.x
 			print(email! + " has been registered")
-			
+			FirebaseDB.createNewUserTable()
+
 			SVProgressHUD.dismiss()
-			
 			self.performSegue(withIdentifier: "startSegue", sender: self)
 			
 		

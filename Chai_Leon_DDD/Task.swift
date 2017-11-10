@@ -41,13 +41,18 @@ struct Task {
 		let snapshotValue = snapshot.value as! [String: AnyObject]
 		name = snapshotValue["name"] as! String
 		description = snapshotValue["description"] as? String
-		
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "MM/dd/yyyy"
+
 		let dateString = snapshotValue["dueDate"] as! String
-		dueDate = dateFormatter.date(from: dateString)!
+		dueDate = Utils.stringToDate(date: dateString)
 		
 		ref = snapshot.ref
+	}
+	
+	public func toAnyObject() -> [AnyHashable : Any]{
+		
+		return ["name" : name,
+		        "description" : description!,
+		        "dueDate" : Utils.dateToString(date: dueDate)]
 	}
 	
 }

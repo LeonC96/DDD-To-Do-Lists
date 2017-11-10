@@ -12,7 +12,6 @@
 		5B0885851FAC355B00B9A01B /* DoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08857D1FAC355A00B9A01B /* DoTableViewCell.swift */; };
 		5B0885861FAC355B00B9A01B /* DoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08857E1FAC355A00B9A01B /* DoneTableViewController.swift */; };
 		5B0885871FAC355B00B9A01B /* DoingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08857F1FAC355A00B9A01B /* DoingTableViewController.swift */; };
-		5B0885881FAC355B00B9A01B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0885801FAC355A00B9A01B /* Data.swift */; };
 		5B0885891FAC355B00B9A01B /* DoingTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0885811FAC355B00B9A01B /* DoingTaskTableViewCell.swift */; };
 		5B08858A1FAC355B00B9A01B /* DoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0885821FAC355B00B9A01B /* DoTableViewController.swift */; };
 		5B08858B1FAC355B00B9A01B /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0885831FAC355B00B9A01B /* NewTaskViewController.swift */; };
@@ -57,7 +56,6 @@
 		5B08857D1FAC355A00B9A01B /* DoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoTableViewCell.swift; sourceTree = "<group>"; };
 		5B08857E1FAC355A00B9A01B /* DoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneTableViewController.swift; sourceTree = "<group>"; };
 		5B08857F1FAC355A00B9A01B /* DoingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoingTableViewController.swift; sourceTree = "<group>"; };
-		5B0885801FAC355A00B9A01B /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		5B0885811FAC355B00B9A01B /* DoingTaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoingTaskTableViewCell.swift; sourceTree = "<group>"; };
 		5B0885821FAC355B00B9A01B /* DoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoTableViewController.swift; sourceTree = "<group>"; };
 		5B0885831FAC355B00B9A01B /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 				5B915BE61FB2A2AA0073516A /* CellControllers */,
 				5B08857C1FAC355A00B9A01B /* Task.swift */,
 				5B4FD0DC1FABE03E00706D8F /* AppDelegate.swift */,
-				5B0885801FAC355A00B9A01B /* Data.swift */,
 				5B915BE41FB27FEB0073516A /* FireBaseDB.swift */,
 				5B915C2A1FB306480073516A /* Utils.swift */,
 				5B4FD0E01FABE03E00706D8F /* Main.storyboard */,
@@ -517,7 +514,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B915BE51FB27FEB0073516A /* FireBaseDB.swift in Sources */,
-				5B0885881FAC355B00B9A01B /* Data.swift in Sources */,
 				5B0885871FAC355B00B9A01B /* DoingTableViewController.swift in Sources */,
 				5B08858A1FAC355B00B9A01B /* DoTableViewController.swift in Sources */,
 				5B0885841FAC355B00B9A01B /* Task.swift in Sources */,

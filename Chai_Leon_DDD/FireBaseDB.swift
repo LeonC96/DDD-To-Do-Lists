@@ -14,32 +14,31 @@ class FirebaseDB{
 	
 	static let rootRef = Database.database().reference()
 	
-	static func getTasks(name: String) -> [Task]{
-		
-		var tasks: [Task] = []
-		
-		let tasksRef = rootRef.child(name)
-		
-		tasksRef.observe(.value, with: { (snapshot) in
-			for child in snapshot.children {
-				let snap = child as! DataSnapshot
-				
-				let task = Task(snapshot: snap)
-				tasks.append(task)
-			}
-		})
-		
-		return tasks
-	}
-	
 	static func addTask(name: String, task: Task){
-		let tasksRef = rootRef.child(name)
-		
-		
+		let user = Auth.auth().currentUser!
+		let tasksRef = rootRef.child(user.uid).child(name)
+			
 		tasksRef.childByAutoId().setValue(["name" : task.name, "description" : task.description, "dueDate" : Utils.dateToString(date: task.dueDate)])
 		
+	}
+	
+	static func updateTask(task: Task){
+		let taskRef = rootRef.child("doTasks")
+		
+		let taskChild = taskRef.child(task.key)
+		taskChild.updateChildValues(["name" : task.name, "description" : task.description!, "dueDate" : task.dueDate])
 		
 	}
 	
+	static func createNewUserTable(){
+		//rootRef.child(user.uid)
+		let user = Auth.auth().currentUser!
+		
+		rootRef.observeSingleEvent(of: .value, with: { (snapshot) in
+			
+			rootRef.child(user.uid).setValue(["doTasks" : "", "doingTasks" : "", "doneTasks" : ""])
+			//rootRef.child(user.uid).child("doTasks").childByAutoId().setValue(["name" : "test"])
+		})
+	}
 	
 }

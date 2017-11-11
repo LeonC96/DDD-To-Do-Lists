@@ -37,8 +37,6 @@ class DoTableViewController: UITableViewController {
 		handle = Auth.auth().addStateDidChangeListener{ (auth, user) in
 			
 		}
-		
-		//getTasks()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -114,7 +112,6 @@ class DoTableViewController: UITableViewController {
     }
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
 		// Table view cells are reused and should be dequeued using a cell identifier.
 		let cellIdentifier = "DoCell"
 		
@@ -122,7 +119,6 @@ class DoTableViewController: UITableViewController {
 
 		// Fetches the appropriate task for the data source layout.
 		let doTask = doTasks[indexPath.row]
-		
 		cell.task = doTask
 		
         return cell
@@ -157,15 +153,16 @@ class DoTableViewController: UITableViewController {
 	               leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
 	{
 		let closeAction = UIContextualAction(style: .normal, title:  "Doing",
-		                                     handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+							 handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 			print("OK, marked as Doing")
+			let task = self.doTasks[indexPath.row]
 			self.doTasks.remove(at: indexPath.row)
+			
 			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
-			//DoingTableViewController.doingTask
-												
+			task.ref?.removeValue()
+			FirebaseDB.addTask(name: "doingTasks", task: task)
 			success(true)
 		})
-		//closeAction.image = UIImage(named: "tick")
 		closeAction.backgroundColor = UIColor(red: 1, green: 0.79, blue: 0.06, alpha: 1)
 		
 		return UISwipeActionsConfiguration(actions: [closeAction])

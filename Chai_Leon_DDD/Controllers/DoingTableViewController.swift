@@ -16,11 +16,12 @@ class DoingTableViewController: UITableViewController {
 	var doingTasks: [Task] = []
 	
 	var rootRef: DatabaseReference = Database.database().reference()
-
+	let user = Auth.auth().currentUser!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+		getTasks()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,7 +30,7 @@ class DoingTableViewController: UITableViewController {
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
-		getTasks()
+
 	}
 
     override func didReceiveMemoryWarning() {
@@ -38,14 +39,23 @@ class DoingTableViewController: UITableViewController {
     }
 
 	func getTasks(){
+		
 		SVProgressHUD.setDefaultMaskType(.black)
 		SVProgressHUD.show(withStatus: "Loading...")
-		rootRef.child(tableName).observe(.value, with: { (snapshot) in
+		rootRef.child(user.uid).child(tableName).observe(.value, with: { (snapshot) in
+			if(snapshot.childrenCount == 0 ){
+				print("no childern")
+				return
+			}
+			if self.doingTasks.count != 0 {
+				self.doingTasks = []
+			}
 			for child in snapshot.children {
 				let snap = child as! DataSnapshot
-				
 				let task = Task(snapshot: snap)
+				
 				self.doingTasks.append(task)
+				
 				DispatchQueue.main.async() {
 					self.tableView.reloadData()
 				}

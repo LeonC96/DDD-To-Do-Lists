@@ -84,6 +84,10 @@ class DoingTableViewController: UITableViewController {
         let task = doingTasks[indexPath.row]
         
         cell.task = task
+		
+		if(Utils.isOverDue(date: task.dueDate)){
+			cell.backgroundColor = UIColor(red:0.99, green:0.28, blue:0.28, alpha:1.0)
+		}
 
         return cell
     }

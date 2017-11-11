@@ -16,16 +16,16 @@ class DoingTaskTableViewCell: UITableViewCell {
 	
     var task: Task? {
         didSet {
-            guard let task = task else { return }
+            guard let task = task else {
+				return
+				
+			}
             
             nameLabel.text = task.name
             descriptionLabel.text = task.description
             nameLabel.sizeToFit()
-            descriptionLabel.sizeToFit()
 			
-			let dateFormatter = DateFormatter()
-			dateFormatter.dateStyle = .short
-			dueDateLbl.text = dateFormatter.string(from: task.dueDate)
+			dueDateLbl.text = Utils.dateToString(date: task.dueDate)
 			dueDateLbl.sizeToFit()
         }
     }
@@ -40,7 +40,6 @@ class DoingTaskTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    @IBAction func doneButton(_ sender: UIButton) {
-    }
+
     
 }

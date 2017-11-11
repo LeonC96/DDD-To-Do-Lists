@@ -82,21 +82,14 @@ class DoTableViewController: UITableViewController {
 			
 			if let selectedIndexPath = tableView.indexPathForSelectedRow {
 				// Update an existing task.
-								
 				let dotaskChild = rootRef.child(user.uid).child(tableName).child(updatedTask.key)
 				
 				dotaskChild.updateChildValues(updatedTask.toAnyObject())
 				
 				tableView.reloadRows(at: [selectedIndexPath], with: .none)
 			} else {
-			
-				//let newIndexPath = IndexPath(row: doTasks.count, section: 0)
-				
 				FirebaseDB.addTask(name: tableName, task: updatedTask)
-				
 				getTasks()
-				//tableView.insertRows(at: [newIndexPath], with: .automatic)
-				
 			}
 		}
 	}
@@ -120,6 +113,10 @@ class DoTableViewController: UITableViewController {
 		// Fetches the appropriate task for the data source layout.
 		let doTask = doTasks[indexPath.row]
 		cell.task = doTask
+		
+		if(Utils.isOverDue(date: doTask.dueDate)){
+			cell.backgroundColor = UIColor(red:0.99, green:0.28, blue:0.28, alpha:1.0)
+		}
 		
         return cell
     }

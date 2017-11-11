@@ -26,4 +26,15 @@ class Utils {
 		return dateFormatter.string(from: date)
 	}
 	
+	static func isOverDue(date: Date) -> Bool{
+		let todayDate = Date()
+		
+		if(todayDate > date){
+			return true
+		} else {
+			return false
+		}
+		
+	}
+	
 }

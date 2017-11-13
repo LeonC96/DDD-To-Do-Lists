@@ -116,6 +116,8 @@ class DoTableViewController: UITableViewController {
 		
 		if(Utils.isOverDue(date: doTask.dueDate)){
 			cell.backgroundColor = UIColor(red:0.99, green:0.28, blue:0.28, alpha:1.0)
+		} else {
+			cell.backgroundColor = UIColor.white
 		}
 		
         return cell

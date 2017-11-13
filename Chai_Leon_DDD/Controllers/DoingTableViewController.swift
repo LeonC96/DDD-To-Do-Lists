@@ -111,6 +111,12 @@ class DoingTableViewController: UITableViewController {
 	{
 		let doAction = UIContextualAction(style: .normal, title:  "Do", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 			print("Moved back to Do")
+			let task = self.doingTasks[indexPath.row]
+			self.doingTasks.remove(at: indexPath.row)
+			
+			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+			task.ref?.removeValue()
+			FirebaseDB.addTask(name: "doTasks", task: task)
 			success(true)
 		})
 
@@ -154,14 +160,34 @@ class DoingTableViewController: UITableViewController {
     }
     */
 
-    /*
+	
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+		super.prepare(for: segue, sender: sender)
+		
+
+		guard let naviViewController = segue.destination as? UINavigationController else {
+			fatalError("Unexpected destination: \(segue.destination)")
+		}
+		
+		guard let taskDetailViewController = naviViewController.viewControllers.first as? DetailTaskViewController else {
+			fatalError("Unexpected sender: \(sender)")
+		}
+		
+		guard let selectedTaskCell = sender as? DoingTaskTableViewCell else {
+			fatalError("Unexpected sender: \(sender)")
+		}
+			
+		guard let indexPath = tableView.indexPath(for: selectedTaskCell) else {
+			fatalError("The selected cell is not being displayed by the table")
+		}
+			
+		let selectedTask = doingTasks[indexPath.row]
+		taskDetailViewController.task = selectedTask
+
     }
-    */
+	
 
 }

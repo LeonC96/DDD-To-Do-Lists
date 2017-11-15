@@ -17,7 +17,7 @@
         <!--Login View Controller-->
         <scene sceneID="1We-6r-QCN">
             <objects>
-                <viewController id="6yR-ZP-6sh" customClass="LoginViewController" customModule="Chai_Leon_DDD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="6yR-ZP-6sh" customClass="LoginViewController" customModule="Chai_Leon_DDD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JOh-wS-Sqz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -356,6 +356,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Do" id="14z-yO-1F8">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="SKS-1q-0t1">
+                            <connections>
+                                <action selector="signOut:" destination="Npv-Vx-PqM" id="kH7-Da-HUF"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hl9-5G-da3">
                             <connections>
                                 <segue destination="7cc-YC-aGb" kind="presentation" identifier="AddTask" id="LB6-B5-w4V"/>

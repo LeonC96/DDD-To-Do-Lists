@@ -77,6 +77,30 @@ class DoTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 	
+	@IBAction func signOut(_ sender: UIBarButtonItem) {
+		
+		let signOutConfirm = UIAlertController(title: "Confirm", message: "Are you sure you want to log out?", preferredStyle: .alert)
+		
+		let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+			print("Ok, Signing Out..")
+			try! Auth.auth().signOut()
+			if let storyboard = self.storyboard {
+				let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginViewController") as! LoginViewController
+				self.navigationController?.pushViewController(vc, animated: true)
+			}
+		})
+		
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+			print("Cancel button tapped")
+		}
+		
+		signOutConfirm.addAction(yes)
+		signOutConfirm.addAction(cancel)
+		
+		// Present dialog message to user
+		self.present(signOutConfirm, animated: true, completion: nil)
+	}
+	
 	@IBAction func unwindToDoTaskList(sender: UIStoryboardSegue){
 		if let sourceViewController = sender.source as? NewTaskViewController, let updatedTask = sourceViewController.task {
 			

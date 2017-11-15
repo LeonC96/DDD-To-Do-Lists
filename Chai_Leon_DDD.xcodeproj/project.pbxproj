@@ -26,6 +26,7 @@
 		5B915BE51FB27FEB0073516A /* FireBaseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B915BE41FB27FEB0073516A /* FireBaseDB.swift */; };
 		5B915C2B1FB306480073516A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B915C2A1FB306480073516A /* Utils.swift */; };
 		5BD0D2E21FB6FD06000D7DAB /* DetailTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0D2E11FB6FD06000D7DAB /* DetailTaskViewController.swift */; };
+		5BD0D2E41FBAFDA0000D7DAB /* DoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0D2E31FBAFDA0000D7DAB /* DoneTableViewCell.swift */; };
 		C425BDC9BC96B5012538DD69 /* Pods_Chai_Leon_DDD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FAFAFA1B742B1A55926DA8 /* Pods_Chai_Leon_DDD.framework */; };
 		EC8F567FD3D6245B5E2EC3AC /* Pods_Chai_Leon_DDDUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51C35AE4999D8B57CDFF2A0C /* Pods_Chai_Leon_DDDUITests.framework */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		5B915BE41FB27FEB0073516A /* FireBaseDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDB.swift; sourceTree = "<group>"; };
 		5B915C2A1FB306480073516A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5BD0D2E11FB6FD06000D7DAB /* DetailTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskViewController.swift; sourceTree = "<group>"; };
+		5BD0D2E31FBAFDA0000D7DAB /* DoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneTableViewCell.swift; sourceTree = "<group>"; };
 		6FCA2FA507A9A4FA4F8C2F07 /* Pods-Chai_Leon_DDDUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chai_Leon_DDDUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chai_Leon_DDDUITests/Pods-Chai_Leon_DDDUITests.release.xcconfig"; sourceTree = "<group>"; };
 		74FAFAFA1B742B1A55926DA8 /* Pods_Chai_Leon_DDD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chai_Leon_DDD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86A193C3B8CC4D24BB166E6C /* Pods-Chai_Leon_DDD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chai_Leon_DDD.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chai_Leon_DDD/Pods-Chai_Leon_DDD.release.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			children = (
 				5B0885811FAC355B00B9A01B /* DoingTaskTableViewCell.swift */,
 				5B08857D1FAC355A00B9A01B /* TaskTableViewCell.swift */,
+				5BD0D2E31FBAFDA0000D7DAB /* DoneTableViewCell.swift */,
 			);
 			path = CellControllers;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				5B0885891FAC355B00B9A01B /* DoingTaskTableViewCell.swift in Sources */,
 				5B0885901FB1159C00B9A01B /* LoginViewController.swift in Sources */,
 				5B0885861FAC355B00B9A01B /* DoneTableViewController.swift in Sources */,
+				5BD0D2E41FBAFDA0000D7DAB /* DoneTableViewCell.swift in Sources */,
 				5BD0D2E21FB6FD06000D7DAB /* DetailTaskViewController.swift in Sources */,
 				5B915C2B1FB306480073516A /* Utils.swift in Sources */,
 			);

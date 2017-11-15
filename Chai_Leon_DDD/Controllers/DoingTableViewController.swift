@@ -87,6 +87,8 @@ class DoingTableViewController: UITableViewController {
 		
 		if(Utils.isOverDue(date: task.dueDate)){
 			cell.backgroundColor = UIColor(red:0.99, green:0.28, blue:0.28, alpha:1.0)
+		} else {
+			cell.backgroundColor = UIColor.white
 		}
 
         return cell
@@ -97,6 +99,12 @@ class DoingTableViewController: UITableViewController {
 	{
 		let doneAction = UIContextualAction(style: .normal, title:  "Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 			print("OK, marked as Done")
+			let task = self.doingTasks[indexPath.row]
+			self.doingTasks.remove(at: indexPath.row)
+			
+			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+			task.ref?.removeValue()
+			FirebaseDB.addTask(name: "doneTasks", task: task)
 			success(true)
 		})
 		

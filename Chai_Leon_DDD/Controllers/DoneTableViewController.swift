@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import Firebase
+import SVProgressHUD
 
 class DoneTableViewController: UITableViewController {
 
+	let tableName = "doneTasks"
+	var doneTasks: [Task] = []
+	
+	var rootRef: DatabaseReference = Database.database().reference()
+	let user = Auth.auth().currentUser!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
+		getTasks()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -24,28 +33,60 @@ class DoneTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	func getTasks(){
+		
+		SVProgressHUD.setDefaultMaskType(.black)
+		SVProgressHUD.show(withStatus: "Loading...")
+		rootRef.child(user.uid).child(tableName).observe(.value, with: { (snapshot) in
+			if(snapshot.childrenCount == 0 ){
+				print("no children")
+				return
+			}
+			if self.doneTasks.count != 0 {
+				self.doneTasks = []
+			}
+			for child in snapshot.children {
+				let snap = child as! DataSnapshot
+				let task = Task(snapshot: snap)
+				
+				self.doneTasks.append(task)
+				
+				DispatchQueue.main.async() {
+					self.tableView.reloadData()
+				}
+			}
+			
+		})
+		SVProgressHUD.dismiss()
+	}
+	
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return doneTasks.count
     }
 
-    /*
+	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DoneCell", for: indexPath) as! DoneTableViewCell
 
         // Configure the cell...
+		let task = doneTasks[indexPath.row]
+		
+		cell.task = task
+
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -60,6 +101,14 @@ class DoneTableViewController: UITableViewController {
 	{
 		let doingAction = UIContextualAction(style: .normal, title:  "Doing", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 			print("Moved back to Doing")
+			
+			let task = self.doneTasks[indexPath.row]
+			self.doneTasks.remove(at: indexPath.row)
+			
+			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+			task.ref?.removeValue()
+			FirebaseDB.addTask(name: "doingTasks", task: task)
+			
 			success(true)
 		})
 
@@ -73,9 +122,15 @@ class DoneTableViewController: UITableViewController {
 	{
 		let deleteAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 			print("OK, marked as Delete")
+			
+			let task = self.doneTasks[indexPath.row]
+			self.doneTasks.remove(at: indexPath.row)
+			
+			tableView.deleteRows(at: [indexPath], with: .fade)
+			task.ref?.removeValue()
+			
 			success(true)
 		})
-		deleteAction.image = UIImage(named: "tick")
 		deleteAction.backgroundColor = .red
 		
 		return UISwipeActionsConfiguration(actions: [deleteAction])
@@ -109,14 +164,34 @@ class DoneTableViewController: UITableViewController {
     }
     */
 
-    /*
+	
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+		super.prepare(for: segue, sender: sender)
+		
+		
+		guard let naviViewController = segue.destination as? UINavigationController else {
+			fatalError("Unexpected destination: \(segue.destination)")
+		}
+		
+		guard let taskDetailViewController = naviViewController.viewControllers.first as? DetailTaskViewController else {
+			fatalError("Unexpected sender: \(sender)")
+		}
+		
+		guard let selectedTaskCell = sender as? DoneTableViewCell else {
+			fatalError("Unexpected sender: \(sender)")
+		}
+		
+		guard let indexPath = tableView.indexPath(for: selectedTaskCell) else {
+			fatalError("The selected cell is not being displayed by the table")
+		}
+		
+		let selectedTask = doneTasks[indexPath.row]
+		taskDetailViewController.task = selectedTask
+
     }
-    */
+	
 
 }

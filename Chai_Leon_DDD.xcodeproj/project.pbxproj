@@ -28,6 +28,10 @@
 		5BD0D2E21FB6FD06000D7DAB /* DetailTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0D2E11FB6FD06000D7DAB /* DetailTaskViewController.swift */; };
 		5BD0D2E41FBAFDA0000D7DAB /* DoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0D2E31FBAFDA0000D7DAB /* DoneTableViewCell.swift */; };
 		5BE344B61FBDBBCB00EC51ED /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE344B51FBDBBCB00EC51ED /* RegisterViewController.swift */; };
+		5BE344BA1FBEEEDD00EC51ED /* in-progress.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE344B71FBEEEDC00EC51ED /* in-progress.png */; };
+		5BE344BB1FBEEEDD00EC51ED /* do-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE344B81FBEEEDD00EC51ED /* do-icon.png */; };
+		5BE344BC1FBEEEDD00EC51ED /* done-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE344B91FBEEEDD00EC51ED /* done-icon.png */; };
+		5BE344BF1FBEF36B00EC51ED /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE344BE1FBEF36B00EC51ED /* TabBar.swift */; };
 		C425BDC9BC96B5012538DD69 /* Pods_Chai_Leon_DDD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FAFAFA1B742B1A55926DA8 /* Pods_Chai_Leon_DDD.framework */; };
 		EC8F567FD3D6245B5E2EC3AC /* Pods_Chai_Leon_DDDUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51C35AE4999D8B57CDFF2A0C /* Pods_Chai_Leon_DDDUITests.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +85,10 @@
 		5BD0D2E11FB6FD06000D7DAB /* DetailTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskViewController.swift; sourceTree = "<group>"; };
 		5BD0D2E31FBAFDA0000D7DAB /* DoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneTableViewCell.swift; sourceTree = "<group>"; };
 		5BE344B51FBDBBCB00EC51ED /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		5BE344B71FBEEEDC00EC51ED /* in-progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "in-progress.png"; sourceTree = "<group>"; };
+		5BE344B81FBEEEDD00EC51ED /* do-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "do-icon.png"; sourceTree = "<group>"; };
+		5BE344B91FBEEEDD00EC51ED /* done-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-icon.png"; sourceTree = "<group>"; };
+		5BE344BE1FBEF36B00EC51ED /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		6FCA2FA507A9A4FA4F8C2F07 /* Pods-Chai_Leon_DDDUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chai_Leon_DDDUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chai_Leon_DDDUITests/Pods-Chai_Leon_DDDUITests.release.xcconfig"; sourceTree = "<group>"; };
 		74FAFAFA1B742B1A55926DA8 /* Pods_Chai_Leon_DDD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chai_Leon_DDD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86A193C3B8CC4D24BB166E6C /* Pods-Chai_Leon_DDD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chai_Leon_DDD.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chai_Leon_DDD/Pods-Chai_Leon_DDD.release.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +143,7 @@
 				5B08858F1FB1159C00B9A01B /* LoginViewController.swift */,
 				5BD0D2E11FB6FD06000D7DAB /* DetailTaskViewController.swift */,
 				5BE344B51FBDBBCB00EC51ED /* RegisterViewController.swift */,
+				5BE344BE1FBEF36B00EC51ED /* TabBar.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -164,6 +173,7 @@
 		5B4FD0DB1FABE03E00706D8F /* Chai_Leon_DDD */ = {
 			isa = PBXGroup;
 			children = (
+				5BE344BD1FBEF02B00EC51ED /* icons */,
 				5B08858C1FAC3C5500B9A01B /* Controllers */,
 				5B915BE61FB2A2AA0073516A /* CellControllers */,
 				5B08857C1FAC355A00B9A01B /* Task.swift */,
@@ -205,6 +215,16 @@
 				5BD0D2E31FBAFDA0000D7DAB /* DoneTableViewCell.swift */,
 			);
 			path = CellControllers;
+			sourceTree = "<group>";
+		};
+		5BE344BD1FBEF02B00EC51ED /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				5BE344B81FBEEEDD00EC51ED /* do-icon.png */,
+				5BE344B91FBEEEDD00EC51ED /* done-icon.png */,
+				5BE344B71FBEEEDC00EC51ED /* in-progress.png */,
+			);
+			path = icons;
 			sourceTree = "<group>";
 		};
 		A35F78410C46BA88FF39ED4F /* Pods */ = {
@@ -337,6 +357,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B4FD0E71FABE03E00706D8F /* LaunchScreen.storyboard in Resources */,
+				5BE344BC1FBEEEDD00EC51ED /* done-icon.png in Resources */,
+				5BE344BB1FBEEEDD00EC51ED /* do-icon.png in Resources */,
+				5BE344BA1FBEEEDD00EC51ED /* in-progress.png in Resources */,
 				5B08858E1FAC569B00B9A01B /* GoogleService-Info.plist in Resources */,
 				5B4FD0E41FABE03E00706D8F /* Assets.xcassets in Resources */,
 				5B4FD0E21FABE03E00706D8F /* Main.storyboard in Resources */,
@@ -531,6 +554,7 @@
 				5B4FD0DD1FABE03E00706D8F /* AppDelegate.swift in Sources */,
 				5B0885891FAC355B00B9A01B /* DoingTaskTableViewCell.swift in Sources */,
 				5B0885901FB1159C00B9A01B /* LoginViewController.swift in Sources */,
+				5BE344BF1FBEF36B00EC51ED /* TabBar.swift in Sources */,
 				5BE344B61FBDBBCB00EC51ED /* RegisterViewController.swift in Sources */,
 				5B0885861FAC355B00B9A01B /* DoneTableViewController.swift in Sources */,
 				5BD0D2E41FBAFDA0000D7DAB /* DoneTableViewCell.swift in Sources */,
@@ -703,6 +727,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S4N6AS4U6H;
 				INFOPLIST_FILE = Chai_Leon_DDD/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -719,6 +744,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S4N6AS4U6H;
 				INFOPLIST_FILE = Chai_Leon_DDD/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

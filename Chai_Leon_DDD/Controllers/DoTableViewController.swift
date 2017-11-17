@@ -23,7 +23,7 @@ class DoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		getTasks()
-		
+		print(user.displayName!)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -239,5 +239,4 @@ class DoTableViewController: UITableViewController {
 		}
     }
 	
-
 }

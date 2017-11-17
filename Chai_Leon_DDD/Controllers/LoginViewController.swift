@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
 	@IBOutlet weak var emailTxtField: UITextField!
 	@IBOutlet weak var passwordTxtField: UITextField!
@@ -22,6 +22,10 @@ class LoginViewController: UIViewController {
 		self.tabBarController?.tabBar.isHidden = true
 		self.navigationController?.navigationBar.isHidden = true
 		
+		emailTxtField.delegate = self
+		passwordTxtField.delegate = self
+		
+		
         // Do any additional setup after loading the view.
     }
 	
@@ -29,6 +33,11 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		self.view.endEditing(true)
+		return false
+	}
     
 	@IBAction func login(_ sender: UIButton) {
 		

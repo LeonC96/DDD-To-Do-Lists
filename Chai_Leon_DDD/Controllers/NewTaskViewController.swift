@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewTaskViewController: UIViewController, UITextFieldDelegate {
+class NewTaskViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
 
 	@IBOutlet weak var taskNameTxtField: UITextField!
 	@IBOutlet weak var dueDateField: UIDatePicker!
@@ -22,6 +22,7 @@ class NewTaskViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
 		taskNameTxtField.delegate = self
+		descriptionField.delegate = self
 		
 		if let task = task {
 			navigationItem.title = task.name
@@ -53,6 +54,11 @@ class NewTaskViewController: UIViewController, UITextFieldDelegate {
 		// Disable the Save button if the text field is empty.
 		let text = taskNameTxtField.text ?? ""
 		saveButton.isEnabled = !text.isEmpty
+	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		self.view.endEditing(true)
+		return false
 	}
 
 	@IBAction func cancel(_ sender: UIBarButtonItem) {

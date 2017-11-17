@@ -36,11 +36,12 @@ class FirebaseDB{
 	
 	static func createNewUserTable(){
 		let user = Auth.auth().currentUser!
-		
+
 		rootRef.observeSingleEvent(of: .value, with: { (snapshot) in
 			
 			rootRef.child(user.uid).setValue(["doTasks" : "", "doingTasks" : "", "doneTasks" : ""])
 		})
 	}
+	
 	
 }

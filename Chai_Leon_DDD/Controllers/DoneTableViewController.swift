@@ -177,11 +177,11 @@ class DoneTableViewController: UITableViewController {
 		}
 		
 		guard let taskDetailViewController = naviViewController.viewControllers.first as? DetailTaskViewController else {
-			fatalError("Unexpected sender: \(sender)")
+			fatalError("Unexpected sender: \(String(describing: sender))")
 		}
 		
 		guard let selectedTaskCell = sender as? DoneTableViewCell else {
-			fatalError("Unexpected sender: \(sender)")
+			fatalError("Unexpected sender: \(String(describing: sender))")
 		}
 		
 		guard let indexPath = tableView.indexPath(for: selectedTaskCell) else {

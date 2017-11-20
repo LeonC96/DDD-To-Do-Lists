@@ -13,6 +13,7 @@ class DetailTaskViewController: UIViewController {
 	@IBOutlet weak var nameLbl: UILabel!
 	@IBOutlet weak var dateLbl: UILabel!
 	@IBOutlet weak var descriptionLbl: UILabel!
+	@IBOutlet weak var userLbl: UILabel!
 	
 	var task: Task?
 	
@@ -30,6 +31,9 @@ class DetailTaskViewController: UIViewController {
 			
 			descriptionLbl.text = task.description
 			descriptionLbl.sizeToFit()
+			
+			userLbl.text = task.user
+			userLbl.sizeToFit()
 		}
 
         // Do any additional setup after loading the view.

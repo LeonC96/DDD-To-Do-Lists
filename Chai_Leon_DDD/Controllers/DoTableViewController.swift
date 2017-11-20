@@ -23,7 +23,6 @@ class DoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		getTasks()
-		print(user.displayName!)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -44,6 +43,16 @@ class DoTableViewController: UITableViewController {
 		Auth.auth().removeStateDidChangeListener(handle!)
 	}
 	
+	private func loadTasks(){
+		self.doTasks.removeAll()
+		FirebaseDB.getTasks(userID: user.uid, tableName: tableName, completion: {(result: [Task]) in
+			self.doTasks.removeAll()
+			self.doTasks = result
+			self.tableView.reloadData()
+		})
+
+	}
+	
 	func getTasks(){
 		
 		SVProgressHUD.setDefaultMaskType(.black)
@@ -62,7 +71,7 @@ class DoTableViewController: UITableViewController {
 				let task = Task(snapshot: snap)
 					
 				self.doTasks.append(task)
-					
+				//print(self.user.displayName)
 				DispatchQueue.main.async() {
 					self.tableView.reloadData()
 				}
@@ -84,7 +93,7 @@ class DoTableViewController: UITableViewController {
 		let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
 			print("Ok, Signing Out..")
 			try! Auth.auth().signOut()
-			if let storyboard = self.storyboard {
+			if self.storyboard != nil {
 				let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginViewController") as! LoginViewController
 				self.navigationController?.pushViewController(vc, animated: true)
 			}
@@ -113,6 +122,7 @@ class DoTableViewController: UITableViewController {
 				tableView.reloadRows(at: [selectedIndexPath], with: .none)
 			} else {
 				FirebaseDB.addTask(name: tableName, task: updatedTask)
+				//loadTasks()
 				getTasks()
 			}
 		}
@@ -178,9 +188,9 @@ class DoTableViewController: UITableViewController {
 		let closeAction = UIContextualAction(style: .normal, title:  "Doing",
 							 handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 			print("OK, marked as Doing")
-			let task = self.doTasks[indexPath.row]
+			var task = self.doTasks[indexPath.row]
+			task.user = self.user.displayName!
 			self.doTasks.remove(at: indexPath.row)
-			
 			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
 			task.ref?.removeValue()
 			FirebaseDB.addTask(name: "doingTasks", task: task)
@@ -224,7 +234,7 @@ class DoTableViewController: UITableViewController {
 				}
 				
 				guard let selectedTaskCell = sender as? TaskTableViewCell else {
-					fatalError("Unexpected sender: \(sender)")
+					fatalError("Unexpected sender: \(String(describing: sender))")
 				}
 				
 				guard let indexPath = tableView.indexPath(for: selectedTaskCell) else {
@@ -235,7 +245,7 @@ class DoTableViewController: UITableViewController {
 				taskDetailViewController.task = selectedTask
 			
 			default:
-			fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+				fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
 		}
     }
 	

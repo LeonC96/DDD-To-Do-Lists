@@ -53,21 +53,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 		
 		let email = emailTxtField.text
 		let password = passwordTxtField.text
+		let username = usernameTxtField.text!
 		
 		if(password != confirmPasswordTxtField.text!){
 			messageLbl.text = "Not the same passwords!"
 			SVProgressHUD.dismiss()
 			return
 		}
-		
-		Auth.auth().createUser(withEmail: email!, password: password!) { (user,error) in
-			if(email! == ""){
-				self.messageLbl.text = "Enter An Email!"
-				self.messageLbl.sizeToFit()
-				self.messageLbl.center.x = self.view.center.x
-				SVProgressHUD.dismiss()
-				return
-			}
+
+		Auth.auth().createUser(withEmail: email!, password: password!, completion: { (user,error) in
 			
 			if error != nil {
 				if(!self.checkPassword(password: password!)){
@@ -82,7 +76,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 				return
 			} else if let user = user {
 				let changeRequest  = user.createProfileChangeRequest()
-				changeRequest.displayName = self.usernameTxtField.text!
+				changeRequest.displayName = "ok"
+				changeRequest.displayName = username
 				changeRequest.commitChanges(completion: { error in
 					if error != nil {
 						print("error in username")
@@ -97,10 +92,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 			self.messageLbl.sizeToFit()
 			self.messageLbl.center.x = self.view.center.x
 			print(email! + " has been registered")
+			FirebaseDB.addUser(username: username)
 			FirebaseDB.createNewUserTable()
 			SVProgressHUD.dismiss()
 			self.performSegue(withIdentifier: "startSegue", sender: self)
-		}
+		})
 			
 		
 	}

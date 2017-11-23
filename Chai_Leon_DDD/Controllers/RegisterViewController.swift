@@ -76,7 +76,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 				return
 			} else if let user = user {
 				let changeRequest  = user.createProfileChangeRequest()
-				changeRequest.displayName = "ok"
 				changeRequest.displayName = username
 				changeRequest.commitChanges(completion: { error in
 					if error != nil {

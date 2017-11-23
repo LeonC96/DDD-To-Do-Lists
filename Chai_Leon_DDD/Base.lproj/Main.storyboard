@@ -108,6 +108,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="Rst-4t-lqs" kind="relationship" relationship="viewControllers" id="VsZ-tP-YES"/>
                         <segue destination="ptT-Fw-IGI" kind="relationship" relationship="viewControllers" id="NDe-Mc-o8A"/>
                         <segue destination="AZO-21-PeL" kind="relationship" relationship="viewControllers" id="BiA-8w-dun"/>
                         <segue destination="NZ1-T2-vV5" kind="relationship" relationship="viewControllers" id="IJT-yB-Qn0"/>
@@ -173,7 +174,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="acx-IC-blT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="365.60000000000002" y="274.8768472906404"/>
+            <point key="canvasLocation" x="366" y="275"/>
         </scene>
         <!--Done-->
         <scene sceneID="GPY-QS-Svo">
@@ -380,11 +381,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Do" id="14z-yO-1F8">
-                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="SKS-1q-0t1">
-                            <connections>
-                                <action selector="signOut:" destination="Npv-Vx-PqM" id="kH7-Da-HUF"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Add User" id="SKS-1q-0t1"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hl9-5G-da3">
                             <connections>
                                 <segue destination="7cc-YC-aGb" kind="presentation" identifier="AddTask" id="LB6-B5-w4V"/>
@@ -474,6 +471,82 @@
             </objects>
             <point key="canvasLocation" x="2915" y="-668"/>
         </scene>
+        <!--Groups-->
+        <scene sceneID="w9M-wb-moZ">
+            <objects>
+                <tableViewController id="9z5-hD-vMe" customClass="GroupsTableViewController" customModule="Chai_Leon_DDD" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wLG-RO-HXw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" id="TI6-Bt-p0k" customClass="GroupTableViewCell" customModule="Chai_Leon_DDD" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TI6-Bt-p0k" id="Jys-gL-rfv">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.666666666666671"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6v3-bl-an2">
+                                            <rect key="frame" x="16" y="11" width="65" height="28"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXx-Iy-o5q">
+                                            <rect key="frame" x="309" y="30" width="42" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User(s): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aW-90-AkS">
+                                            <rect key="frame" x="16" y="47" width="70" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;Users&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nT5-ft-NUe">
+                                            <rect key="frame" x="94" y="47" width="207" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLbl" destination="6v3-bl-an2" id="0LZ-W1-THD"/>
+                                    <outlet property="nubmerOfTasksLbl" destination="tXx-Iy-o5q" id="yUe-rn-3x8"/>
+                                    <outlet property="usersLbl" destination="nT5-ft-NUe" id="Zeb-1o-0uY"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="9z5-hD-vMe" id="imM-pb-6nd"/>
+                            <outlet property="delegate" destination="9z5-hD-vMe" id="scp-VO-3PL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Groups" id="9S4-SJ-tr6">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="ZUz-gs-b9X">
+                            <connections>
+                                <action selector="signOut:" destination="9z5-hD-vMe" id="GM8-6p-65i"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="vQS-X5-hWn">
+                            <connections>
+                                <action selector="addNewGroup:" destination="9z5-hD-vMe" id="jXz-eQ-ub4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y3g-uG-r3w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1373.5999999999999" y="-1889.408866995074"/>
+        </scene>
         <!--Do-->
         <scene sceneID="t94-Ge-tfa">
             <objects>
@@ -507,7 +580,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQx-Wq-7U9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2133" y="-1234"/>
+            <point key="canvasLocation" x="2119" y="-1190"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="scW-aI-6tH">
@@ -639,17 +712,37 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uUD-Z4-F5v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="399" y="1148"/>
+            <point key="canvasLocation" x="366" y="1148"/>
+        </scene>
+        <!--Groups-->
+        <scene sceneID="RAg-s2-ggO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rst-4t-lqs" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Groups" image="group-icon.png" id="GYA-mV-uQy"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0Rs-j1-A9g">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9z5-hD-vMe" kind="relationship" relationship="rootViewController" id="7YK-rR-Bih"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gZb-UG-1TJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364.80000000000001" y="-1437.192118226601"/>
         </scene>
     </scenes>
     <resources>
         <image name="do-icon.png" width="50" height="50"/>
         <image name="done-icon.png" width="50" height="50"/>
+        <image name="group-icon.png" width="50" height="50"/>
         <image name="in-progress.png" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xkg-bH-pOO"/>
-        <segue reference="FKB-Wh-PkO"/>
+        <segue reference="dUn-8q-DwL"/>
         <segue reference="Izn-qc-Qzo"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -23,6 +23,7 @@
 		5B4FD0E71FABE03E00706D8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B4FD0E51FABE03E00706D8F /* LaunchScreen.storyboard */; };
 		5B4FD0F21FABE03F00706D8F /* Chai_Leon_DDDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4FD0F11FABE03F00706D8F /* Chai_Leon_DDDTests.swift */; };
 		5B4FD0FD1FABE03F00706D8F /* Chai_Leon_DDDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4FD0FC1FABE03F00706D8F /* Chai_Leon_DDDUITests.swift */; };
+		5B8D14DE1FC7951E00F0D1E6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D14DD1FC7951E00F0D1E6 /* TabBarController.swift */; };
 		5B915BE51FB27FEB0073516A /* FireBaseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B915BE41FB27FEB0073516A /* FireBaseDB.swift */; };
 		5B915C2B1FB306480073516A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B915C2A1FB306480073516A /* Utils.swift */; };
 		5BADDBAD1FC5283900F3E1F3 /* group-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDBAC1FC5283900F3E1F3 /* group-icon.png */; };
@@ -84,6 +85,7 @@
 		5B4FD0F81FABE03F00706D8F /* Chai_Leon_DDDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Chai_Leon_DDDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B4FD0FC1FABE03F00706D8F /* Chai_Leon_DDDUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chai_Leon_DDDUITests.swift; sourceTree = "<group>"; };
 		5B4FD0FE1FABE03F00706D8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B8D14DD1FC7951E00F0D1E6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5B915BE41FB27FEB0073516A /* FireBaseDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDB.swift; sourceTree = "<group>"; };
 		5B915C2A1FB306480073516A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5BADDBAC1FC5283900F3E1F3 /* group-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group-icon.png"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				5BE344B51FBDBBCB00EC51ED /* RegisterViewController.swift */,
 				5BE344BE1FBEF36B00EC51ED /* TabBar.swift */,
 				5BADDBAE1FC5295200F3E1F3 /* GroupsTableViewController.swift */,
+				5B8D14DD1FC7951E00F0D1E6 /* TabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				5B08858B1FAC355B00B9A01B /* NewTaskViewController.swift in Sources */,
 				5B4FD0DD1FABE03E00706D8F /* AppDelegate.swift in Sources */,
 				5BADDBB31FC6E88900F3E1F3 /* Group.swift in Sources */,
+				5B8D14DE1FC7951E00F0D1E6 /* TabBarController.swift in Sources */,
 				5B0885891FAC355B00B9A01B /* DoingTaskTableViewCell.swift in Sources */,
 				5B0885901FB1159C00B9A01B /* LoginViewController.swift in Sources */,
 				5BE344BF1FBEF36B00EC51ED /* TabBar.swift in Sources */,

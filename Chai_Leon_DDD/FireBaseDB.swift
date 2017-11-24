@@ -15,9 +15,8 @@ class FirebaseDB{
 	static let rootRef = Database.database().reference()
 	
 	// Add task to a given table to current user
-	static func addTask(name: String, task: Task){
-		let user = Auth.auth().currentUser!
-		let tasksRef = rootRef.child(user.uid).child(name)
+	static func addTask(name: String, task: Task, groupID: String){
+		let tasksRef = rootRef.child(groupID).child(name)
 		
 		if(task.key == ""){
 			tasksRef.childByAutoId().setValue(task.toAnyObject())
@@ -56,6 +55,7 @@ class FirebaseDB{
 		})
 	}
 	
+	
 	//creates a new todo list project
 	static func createProject(name: String){
 		let user = Auth.auth().currentUser!
@@ -85,9 +85,6 @@ class FirebaseDB{
 		})
 	}
 	
-	static func getNumberOfTasks(){
-		
-	}
 	
 	
 }

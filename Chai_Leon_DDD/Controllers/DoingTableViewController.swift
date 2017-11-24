@@ -14,12 +14,21 @@ class DoingTableViewController: UITableViewController {
 
 	let tableName = "doingTasks"
 	var doingTasks: [Task] = []
+	var group: Group?
 	
 	var rootRef: DatabaseReference = Database.database().reference()
 	let user = Auth.auth().currentUser!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		let tabBar = self.tabBarController as! TabBarContoller
+		if tabBar.group == nil{
+			self.group = Group(key: user.uid, users: user.displayName!)
+			tabBar.group = self.group
+		} else {
+			self.group = tabBar.group!
+		}
 
 		getTasks()
         // Uncomment the following line to preserve selection between presentations
@@ -42,7 +51,7 @@ class DoingTableViewController: UITableViewController {
 		
 		SVProgressHUD.setDefaultMaskType(.black)
 		SVProgressHUD.show(withStatus: "Loading...")
-		rootRef.child(user.uid).child(tableName).observe(.value, with: { (snapshot) in
+		rootRef.child(group!.key).child(tableName).observe(.value, with: { (snapshot) in
 			if(snapshot.childrenCount == 0 ){
 				print("no childern")
 				return
@@ -104,7 +113,7 @@ class DoingTableViewController: UITableViewController {
 			
 			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
 			task.ref?.removeValue()
-			FirebaseDB.addTask(name: "doneTasks", task: task)
+			FirebaseDB.addTask(name: "doneTasks", task: task, groupID: self.group!.key)
 			success(true)
 		})
 		
@@ -124,7 +133,7 @@ class DoingTableViewController: UITableViewController {
 			
 			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
 			task.ref?.removeValue()
-			FirebaseDB.addTask(name: "doTasks", task: task)
+			FirebaseDB.addTask(name: "doTasks", task: task, groupID: self.group!.key)
 			success(true)
 		})
 

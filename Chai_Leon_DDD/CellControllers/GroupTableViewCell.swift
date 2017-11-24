@@ -26,7 +26,7 @@ class GroupTableViewCell: UITableViewCell {
 			nameLbl.sizeToFit()
 			usersLbl.sizeToFit()
 			
-			nubmerOfTasksLbl.text = String(group.numberOfTasks)
+			nubmerOfTasksLbl.text = ""
 		}
 	}
 	

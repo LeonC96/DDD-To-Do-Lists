@@ -61,6 +61,16 @@ class GroupsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let tabBar = self.tabBarController as! TabBarContoller
+		let group = groups[indexPath.row]
+		tabBar.group = group
+		
+		tabBar.selectedIndex = 1
+		
+		
+	}
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -129,17 +139,29 @@ class GroupsTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+			
+			let group = groups[indexPath.row]
+			
+			if(group.key == user.uid){
+				let alert = UIAlertController(title: "Error", message: "Cannot Delete Personal ToDo List", preferredStyle: UIAlertControllerStyle.alert)
+				alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+				self.present(alert, animated: true, completion: nil)
+				return
+			}
+			
+			groups.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+			group.ref?.removeValue()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
@@ -156,14 +178,32 @@ class GroupsTableViewController: UITableViewController {
     }
     */
 
-    /*
+	
     // MARK: - Navigation
-
+	/*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+		
+		guard let naviViewController = segue.destination as? UINavigationController else {
+			fatalError("Unexpected destination: \(segue.destination)")
+		}
+		
+		guard let doTableViewController = naviViewController.viewControllers.first as? DoTableViewController else {
+			fatalError("Unexpected sender: \(String(describing: sender))")
+		}
+		
+		guard let selectedGroupCell = sender as? GroupTableViewCell else {
+			fatalError("Unexpected sender: \(String(describing: sender))")
+		}
+		
+		guard let indexPath = tableView.indexPath(for: selectedGroupCell) else {
+			fatalError("The selected cell is not being displayed by the table")
+		}
+		
+		let selectedGroup = groups[indexPath.row]
+		doTableViewController.group = selectedGroup
     }
-    */
+	*/
 
 }

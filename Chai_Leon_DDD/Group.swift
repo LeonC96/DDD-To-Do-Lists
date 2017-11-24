@@ -17,7 +17,7 @@ struct Group {
 	var numberOfTasks: Int
 	let ref: DatabaseReference?
 	
-	init(key: String = "", name: String, users: String, numberOfTasks: Int = 0){
+	init(key: String = "", name: String = "", users: String, numberOfTasks: Int = 0){
 		self.key = key
 		self.name = name
 		self.users = users

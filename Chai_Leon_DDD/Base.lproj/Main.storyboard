@@ -98,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="-1559.2" y="-119.70443349753695"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar Contoller-->
         <scene sceneID="nxf-ye-KwV">
             <objects>
-                <tabBarController id="FcG-0Z-tAg" sceneMemberID="viewController">
+                <tabBarController id="FcG-0Z-tAg" customClass="TabBarContoller" customModule="Chai_Leon_DDD" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZdI-5M-xzh" customClass="TabBar" customModule="Chai_Leon_DDD" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -381,7 +381,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Do" id="14z-yO-1F8">
-                        <barButtonItem key="leftBarButtonItem" title="Add User" id="SKS-1q-0t1"/>
+                        <barButtonItem key="leftBarButtonItem" title="Add User" id="SKS-1q-0t1">
+                            <connections>
+                                <action selector="addUser:" destination="Npv-Vx-PqM" id="UoP-jb-FbZ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hl9-5G-da3">
                             <connections>
                                 <segue destination="7cc-YC-aGb" kind="presentation" identifier="AddTask" id="LB6-B5-w4V"/>
@@ -494,13 +498,6 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXx-Iy-o5q">
-                                            <rect key="frame" x="309" y="30" width="42" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User(s): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aW-90-AkS">
                                             <rect key="frame" x="16" y="47" width="70" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -508,8 +505,15 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXx-Iy-o5q">
+                                            <rect key="frame" x="309" y="30" width="42" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;Users&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nT5-ft-NUe">
-                                            <rect key="frame" x="94" y="47" width="207" height="22"/>
+                                            <rect key="frame" x="84" y="47" width="207" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
@@ -742,7 +746,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xkg-bH-pOO"/>
-        <segue reference="dUn-8q-DwL"/>
+        <segue reference="FKB-Wh-PkO"/>
         <segue reference="Izn-qc-Qzo"/>
     </inferredMetricsTieBreakers>
 </document>

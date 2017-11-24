@@ -15,6 +15,8 @@ class DoTableViewController: UITableViewController {
 
 	let tableName = "doTasks"
 	
+	var group: Group?
+	
 	var doTasks: [Task] = []
 	var handle: AuthStateDidChangeListenerHandle?
 	var rootRef: DatabaseReference = Database.database().reference()
@@ -22,13 +24,21 @@ class DoTableViewController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		let tabBar = self.tabBarController as! TabBarContoller
+		if tabBar.group == nil{
+			self.group = Group(key: user.uid, users: user.displayName!)
+			tabBar.group = self.group
+		} else {
+			self.group = tabBar.group!
+		}
+		
 		getTasks()
 
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-
+		print(group!.key)
 		handle = Auth.auth().addStateDidChangeListener{ (auth, user) in
 			
 		}
@@ -43,7 +53,7 @@ class DoTableViewController: UITableViewController {
 		
 		SVProgressHUD.setDefaultMaskType(.black)
 		SVProgressHUD.show(withStatus: "Loading...")
-		rootRef.child(user.uid).child(tableName).observe(.value, with: { (snapshot) in
+		rootRef.child(group!.key).child(tableName).observe(.value, with: { (snapshot) in
 			if(snapshot.childrenCount == 0 ){
 				print("no childern")
 				return
@@ -71,18 +81,23 @@ class DoTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 	
+	@IBAction func addUser(_ sender: UIBarButtonItem) {
+		
+	}
+	
+	
 	@IBAction func unwindToDoTaskList(sender: UIStoryboardSegue){
 		if let sourceViewController = sender.source as? NewTaskViewController, let updatedTask = sourceViewController.task {
 			
 			if let selectedIndexPath = tableView.indexPathForSelectedRow {
 				// Update an existing task.
-				let dotaskChild = rootRef.child(user.uid).child(tableName).child(updatedTask.key)
+				let dotaskChild = rootRef.child(group!.key).child(tableName).child(updatedTask.key)
 				
 				dotaskChild.updateChildValues(updatedTask.toAnyObject())
 				
 				tableView.reloadRows(at: [selectedIndexPath], with: .none)
 			} else {
-				FirebaseDB.addTask(name: tableName, task: updatedTask)
+				FirebaseDB.addTask(name: tableName, task: updatedTask, groupID: group!.key)
 				//loadTasks()
 				getTasks()
 			}
@@ -154,7 +169,7 @@ class DoTableViewController: UITableViewController {
 			self.doTasks.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
 			task.ref?.removeValue()
-			FirebaseDB.addTask(name: "doingTasks", task: task)
+			FirebaseDB.addTask(name: "doingTasks", task: task, groupID: self.group!.key)
 			success(true)
 		})
 		closeAction.backgroundColor = UIColor(red: 1, green: 0.79, blue: 0.06, alpha: 1)

@@ -79,6 +79,7 @@ class FirebaseDB{
 			if snapshot.hasChildren() {
 				for child in snapshot.children {
 					let snap = child as! DataSnapshot
+					
  				}
 			}
 			

@@ -14,8 +14,18 @@ struct Group {
 	let key: String
 	var name: String
 	var users: String
+	//not used yet
 	var numberOfTasks: Int
+	
 	let ref: DatabaseReference?
+	
+	init(){
+		self.key = ""
+		self.name = ""
+		self.users = ""
+		self.numberOfTasks = 0
+		self.ref = nil
+	}
 	
 	init(key: String = "", name: String = "", users: String, numberOfTasks: Int = 0){
 		self.key = key
@@ -35,5 +45,11 @@ struct Group {
 		self.numberOfTasks = numberOfTasks
 		
 		self.ref = snapshot.ref
+	}
+	
+	public func toAnyObject() -> [AnyHashable : Any]{
+		
+		return ["name" : name,
+				"users" : users]
 	}
 }

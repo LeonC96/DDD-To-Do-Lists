@@ -15,7 +15,7 @@ class DoTableViewController: UITableViewController {
 
 	let tableName = "doTasks"
 	
-	var group: Group?
+	var group: Group = Group()
 	
 	var doTasks: [Task] = []
 	var handle: AuthStateDidChangeListenerHandle?
@@ -24,6 +24,11 @@ class DoTableViewController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+
+    }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		let tabBar = self.tabBarController as! TabBarContoller
 		if tabBar.group == nil{
 			self.group = Group(key: user.uid, users: user.displayName!)
@@ -31,14 +36,7 @@ class DoTableViewController: UITableViewController {
 		} else {
 			self.group = tabBar.group!
 		}
-		
 		getTasks()
-
-    }
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		print(group!.key)
 		handle = Auth.auth().addStateDidChangeListener{ (auth, user) in
 			
 		}
@@ -53,13 +51,14 @@ class DoTableViewController: UITableViewController {
 		
 		SVProgressHUD.setDefaultMaskType(.black)
 		SVProgressHUD.show(withStatus: "Loading...")
-		rootRef.child(group!.key).child(tableName).observe(.value, with: { (snapshot) in
+		rootRef.child(group.key).child(tableName).observe(.value, with: { (snapshot) in
+			self.doTasks = []
 			if(snapshot.childrenCount == 0 ){
 				print("no childern")
+				DispatchQueue.main.async() {
+					self.tableView.reloadData()
+				}
 				return
-			}
-			if self.doTasks.count != 0 {
-				self.doTasks = []
 			}
 			for child in snapshot.children {
 				let snap = child as! DataSnapshot
@@ -82,7 +81,57 @@ class DoTableViewController: UITableViewController {
     }
 	
 	@IBAction func addUser(_ sender: UIBarButtonItem) {
+		let addUserAlert = UIAlertController(title: "Add User", message: "Enter User's Email:", preferredStyle: .alert)
 		
+		addUserAlert.addTextField(configurationHandler: { (textField: UITextField) -> Void in
+			textField.placeholder = "Name"
+		})
+		
+		let add = UIAlertAction(title: "Add", style: .default, handler: { (action) -> Void in
+			self.rootRef.child("users").observeSingleEvent(of: .value, with: { (snapshot) in				
+				var found = false
+				for child in snapshot.children {
+					let snap = child as! DataSnapshot
+					let snapshotValue = snap.value as! [String: AnyObject]
+					let snapshotEmail = snapshotValue["email"] as! String
+					
+					if(snapshotEmail == addUserAlert.textFields![0].text!){
+						let userName = snapshotValue["name"] as! String
+						self.group.users += ", \(userName)"
+						self.rootRef.child("users").child(snap.key).child("projects").child(self.group.key).child("name")
+							.setValue(self.group.name)
+						self.rootRef.child("users").child(snap.key).child("projects").child(self.group.key).child("users")
+							.setValue(self.group.users)
+						self.rootRef.child("users").child(self.user.uid).child("projects").child(self.group.key).child("users")
+							.setValue(self.group.users)
+						found = true
+						break
+					}
+					
+				}
+				
+				if(!found){
+					let errorAlert = UIAlertController(title: "ERROR", message: "User Does Not Exist", preferredStyle: .alert)
+					let ok = UIAlertAction(title: "OK", style: .cancel) { (action) -> Void in
+						print("Cancel button tapped")
+					}
+					
+					errorAlert.addAction(ok)
+					self.present(errorAlert, animated: true, completion: nil)
+				}
+				
+			})
+			
+			print("Ok, Adding User")
+		})
+		
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+			print("Cancel button tapped")
+		}
+		
+		addUserAlert.addAction(add)
+		addUserAlert.addAction(cancel)
+		self.present(addUserAlert, animated: true, completion: nil)
 	}
 	
 	
@@ -91,14 +140,13 @@ class DoTableViewController: UITableViewController {
 			
 			if let selectedIndexPath = tableView.indexPathForSelectedRow {
 				// Update an existing task.
-				let dotaskChild = rootRef.child(group!.key).child(tableName).child(updatedTask.key)
+				let dotaskChild = rootRef.child(group.key).child(tableName).child(updatedTask.key)
 				
 				dotaskChild.updateChildValues(updatedTask.toAnyObject())
 				
 				tableView.reloadRows(at: [selectedIndexPath], with: .none)
 			} else {
-				FirebaseDB.addTask(name: tableName, task: updatedTask, groupID: group!.key)
-				//loadTasks()
+				FirebaseDB.addTask(name: tableName, task: updatedTask, groupID: group.key)
 				getTasks()
 			}
 		}
@@ -169,7 +217,7 @@ class DoTableViewController: UITableViewController {
 			self.doTasks.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
 			task.ref?.removeValue()
-			FirebaseDB.addTask(name: "doingTasks", task: task, groupID: self.group!.key)
+			FirebaseDB.addTask(name: "doingTasks", task: task, groupID: self.group.key)
 			success(true)
 		})
 		closeAction.backgroundColor = UIColor(red: 1, green: 0.79, blue: 0.06, alpha: 1)

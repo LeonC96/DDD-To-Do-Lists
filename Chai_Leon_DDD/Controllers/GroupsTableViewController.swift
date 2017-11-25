@@ -64,6 +64,7 @@ class GroupsTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let tabBar = self.tabBarController as! TabBarContoller
+		tabBar.group = nil
 		let group = groups[indexPath.row]
 		tabBar.group = group
 		

@@ -37,6 +37,19 @@ class DoneTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		let tabBar = self.tabBarController as! TabBarContoller
+		if tabBar.group == nil{
+			self.group = Group(key: user.uid, users: user.displayName!)
+			tabBar.group = self.group
+		} else {
+			self.group = tabBar.group!
+		}
+		
+		getTasks()
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -48,13 +61,15 @@ class DoneTableViewController: UITableViewController {
 		SVProgressHUD.setDefaultMaskType(.black)
 		SVProgressHUD.show(withStatus: "Loading...")
 		rootRef.child(group!.key).child(tableName).observe(.value, with: { (snapshot) in
+			self.doneTasks = []
 			if(snapshot.childrenCount == 0 ){
 				print("no children")
+				DispatchQueue.main.async() {
+					self.tableView.reloadData()
+				}
 				return
 			}
-			if self.doneTasks.count != 0 {
-				self.doneTasks = []
-			}
+
 			for child in snapshot.children {
 				let snap = child as! DataSnapshot
 				let task = Task(snapshot: snap)

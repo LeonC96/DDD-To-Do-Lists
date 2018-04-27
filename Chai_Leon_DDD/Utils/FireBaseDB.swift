@@ -51,7 +51,16 @@ class FirebaseDB{
 		let user = Auth.auth().currentUser!
 		rootRef.observeSingleEvent(of: .value, with: { (snapshot) in
 			
-			rootRef.child("users").child(user.uid).setValue(["email" : user.email!, "name" : username, "projects" : [user.uid : ["name" : "Personal", "users" : username]]])
+			rootRef.child("users").child(user.uid).setValue([
+				"email" : user.email!,
+				"name" : username,
+				"projects" : [
+					user.uid : [
+						"name" : "Personal",
+						"users" : username
+					]
+				]
+			])
 		})
 	}
 	
@@ -65,27 +74,14 @@ class FirebaseDB{
 			let projectID = project.key
 			
 			//project.setValue(["doTasks" : "", "doingTasks" : "", "doneTasks" : ""])
-			rootRef.child("users").child(user.uid).child("projects").child(projectID).setValue(["name" : name, "users" : user.displayName!])
+			rootRef.child("users").child(user.uid).child("projects").child(projectID).setValue([
+				"name" : name,
+				"users" : user.displayName!
+				])
 			
 		})
 	}
-	
-	//NOT TESTED YET
-	static func addUserToProject(email: String){
-		//let user = Auth.auth().currentUser!
-		let usersRef = rootRef.child("users")
-		usersRef.observeSingleEvent(of: .value, with: { (snapshot) in
-			
-			if snapshot.hasChildren() {
-				for child in snapshot.children {
-					let snap = child as! DataSnapshot
-					
- 				}
-			}
-			
-		})
-	}
-	
+
 	
 	
 }

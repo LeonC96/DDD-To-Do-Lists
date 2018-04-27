@@ -214,6 +214,7 @@ class DoTableViewController: UITableViewController {
 			print("OK, marked as Doing")
 			var task = self.doTasks[indexPath.row]
 			task.user = self.user.displayName!
+			task.userId = self.user.uid
 			self.doTasks.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
 			task.ref?.removeValue()

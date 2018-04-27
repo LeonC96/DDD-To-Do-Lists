@@ -118,14 +118,15 @@ class DoingTableViewController: UITableViewController {
 	               leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
 	{
 		let doneAction = UIContextualAction(style: .normal, title:  "Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-			print("OK, marked as Done")
+
 			let task = self.doingTasks[indexPath.row]
-			self.doingTasks.remove(at: indexPath.row)
-			
-			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
-			task.ref?.removeValue()
-			FirebaseDB.addTask(name: "doneTasks", task: task, groupID: self.group!.key)
-			success(true)
+			if(task.userId == self.user.uid){
+				self.doingTasks.remove(at: indexPath.row)
+				tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+				task.ref?.removeValue()
+				FirebaseDB.addTask(name: "doneTasks", task: task, groupID: self.group!.key)
+				success(true)
+			}
 		})
 		
 		doneAction.backgroundColor = UIColor(red:0.05, green:0.85, blue:0.08, alpha:1.0)
@@ -138,14 +139,16 @@ class DoingTableViewController: UITableViewController {
 	               trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
 	{
 		let doAction = UIContextualAction(style: .normal, title:  "Do", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-			print("Moved back to Do")
-			let task = self.doingTasks[indexPath.row]
-			self.doingTasks.remove(at: indexPath.row)
 			
-			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
-			task.ref?.removeValue()
-			FirebaseDB.addTask(name: "doTasks", task: task, groupID: self.group!.key)
-			success(true)
+			let task = self.doingTasks[indexPath.row]
+			if(task.userId == self.user.uid){
+				self.doingTasks.remove(at: indexPath.row)
+			
+				tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+				task.ref?.removeValue()
+				FirebaseDB.addTask(name: "doTasks", task: task, groupID: self.group!.key)
+				success(true)
+			}
 		})
 
 		doAction.backgroundColor = .blue

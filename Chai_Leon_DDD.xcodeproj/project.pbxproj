@@ -185,14 +185,12 @@
 		5B4FD0DB1FABE03E00706D8F /* Chai_Leon_DDD */ = {
 			isa = PBXGroup;
 			children = (
+				5B8D14E21FC9077300F0D1E6 /* Utils */,
+				5B8D14E11FC9075500F0D1E6 /* Models */,
 				5BE344BD1FBEF02B00EC51ED /* icons */,
 				5B08858C1FAC3C5500B9A01B /* Controllers */,
 				5B915BE61FB2A2AA0073516A /* CellControllers */,
-				5B08857C1FAC355A00B9A01B /* Task.swift */,
-				5BADDBB21FC6E88800F3E1F3 /* Group.swift */,
 				5B4FD0DC1FABE03E00706D8F /* AppDelegate.swift */,
-				5B915BE41FB27FEB0073516A /* FireBaseDB.swift */,
-				5B915C2A1FB306480073516A /* Utils.swift */,
 				5B4FD0E01FABE03E00706D8F /* Main.storyboard */,
 				5B4FD0E31FABE03E00706D8F /* Assets.xcassets */,
 				5B4FD0E51FABE03E00706D8F /* LaunchScreen.storyboard */,
@@ -218,6 +216,24 @@
 				5B4FD0FE1FABE03F00706D8F /* Info.plist */,
 			);
 			path = Chai_Leon_DDDUITests;
+			sourceTree = "<group>";
+		};
+		5B8D14E11FC9075500F0D1E6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5B08857C1FAC355A00B9A01B /* Task.swift */,
+				5BADDBB21FC6E88800F3E1F3 /* Group.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5B8D14E21FC9077300F0D1E6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5B915C2A1FB306480073516A /* Utils.swift */,
+				5B915BE41FB27FEB0073516A /* FireBaseDB.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		5B915BE61FB2A2AA0073516A /* CellControllers */ = {

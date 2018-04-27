@@ -16,16 +16,19 @@ struct Task {
 	var description: String?
 	var dueDate: Date
 	var user: String
+	var userId: String
 	let ref: DatabaseReference?
+	
 	//var isOverDue: Bool
 	
-	init(name: String, description: String?, dueDate: Date = Date.init(), key: String = "", user: String = "") {
+	init(name: String, description: String?, dueDate: Date = Date.init(), key: String = "", user: String = "", userId: String = "") {
 		
 		self.key = key
 		self.name = name
 		self.description = description
 		self.dueDate = dueDate
 		self.user = user
+		self.userId = userId
 		
 		self.ref = nil
 	}
@@ -44,6 +47,13 @@ struct Task {
 		} else {
 			user = ""
 		}
+		
+		if(snapshotValue["userId"] != nil){
+			userId = snapshotValue["userId"] as! String
+		} else {
+			userId = ""
+		}
+		
 		ref = snapshot.ref
 	}
 	
@@ -52,7 +62,8 @@ struct Task {
 		return ["name" : name,
 		        "description" : description!,
 		        "dueDate" : Utils.dateToString(date: dueDate),
-				"user" : user]
+				"user" : user,
+				"userId" : userId]
 	}
 	
 }

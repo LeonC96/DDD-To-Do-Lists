@@ -26,6 +26,7 @@ class GroupTableViewCell: UITableViewCell {
 			nameLbl.sizeToFit()
 			//usersLbl.sizeToFit()
 			
+			//Not yet functional
 			nubmerOfTasksLbl.text = ""
 		}
 	}

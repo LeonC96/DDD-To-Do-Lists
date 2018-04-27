@@ -22,7 +22,7 @@ class DoneTableViewCell: UITableViewCell {
 			}
 			
 			nameLabel.text = task.name
-			descriptionLabel.text = task.description
+			descriptionLabel.text = "Done By: " + task.user
 			nameLabel.sizeToFit()
 			
 			dueDateLbl.text = Utils.dateToString(date: task.dueDate)

@@ -1,6 +1,4 @@
 # DDD-To-Do-Lists
-DDD: To-Do Lists iOS app
-DDD-To-Do-Lists
 DDD: To-Do Lists
 
 A To-Do Lists app made for iOS. This is my final project for my iOS development class.
